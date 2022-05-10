@@ -13,8 +13,8 @@ public class HourContract {
 		this.hours = hours;
 	}
 
-	private void totalValue() {
-		
+	public double totalValue() {
+		return this.valuePerHour * this.hours;
 	}
 
 	public Date getDate() {

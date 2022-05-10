@@ -16,6 +16,8 @@ public class Program {
 
 	public static void main(String[] args) throws ParseException {
 		
+		Worker worker;
+		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); //Essa definição está especificando que esperamos uma data que contenha dia/mês/ano.
@@ -27,11 +29,10 @@ public class Program {
 		System.out.print("Name: ");
 		String name = sc.nextLine();
 		System.out.print("Level: ");	
-		String level1 = sc.nextLine();
-		WorkerLevel level2 = WorkerLevel.valueOf(level1);
+		WorkerLevel level2 = WorkerLevel.valueOf(sc.nextLine());
 		System.out.print("Base salary: ");
 		double baseSalary = sc.nextDouble();
-		Worker worker = new Worker(name, level2, baseSalary);
+		worker = new Worker(name, level2, baseSalary, department);
 		
 		System.out.print("How many contracts to this worker: ");
 		int contractNumber = sc.nextInt();
@@ -57,7 +58,6 @@ public class Program {
 		
 		SimpleDateFormat formatterMMYYY = new SimpleDateFormat("MM/yyyy"); //Essa definição está especificando que esperamos uma data que contenha dia/mês/ano.
 		Date date = formatterMMYYY.parse(monthYearIntput);
-		
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(date);
 		
@@ -65,10 +65,9 @@ public class Program {
 		int month = cal1.get(Calendar.MONTH) + 1;
 		
 		double income = worker.income(year, month);
-		
 
-		System.out.println("Name " + worker.getName()
-				+ "\nDepartment: " + department.getName()
+		System.out.println("Name: " + worker.getName()
+				+ "\nDepartment: " + worker.getDepartment().getName()
 				+ "\nIncome for " + month + "/" + year + ": " + String.format("%.2f", income));
 		
 		sc.close();
